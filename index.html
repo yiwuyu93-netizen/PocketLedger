@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+
+  <meta name="theme-color" content="#f7f8fc" />
+  <meta
+    name="description"
+    content="简洁、轻量、支持离线使用的个人记账应用。"
+  />
+
+  <title>小账本 - 个人记账</title>
+
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+  />
+  <meta name="apple-mobile-web-app-title" content="小账本" />
+
+  <script src="./app.js" defer></script>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- 顶部栏 -->
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PERSONAL FINANCE</p>
+        <h1 id="page-title">我的账本</h1>
+      </div>
+
+      <div class="avatar" aria-label="小账本">
+        <span>账</span>
+      </div>
+    </header>
+
+    <main id="main-content">
+
+      <!-- ================= 首页 ================= -->
+      <section class="page active" id="page-home">
+
+        <article class="hero-card">
+          <div class="hero-top">
+            <span class="hero-label">累计支出</span>
+            <span class="hero-icon" aria-hidden="true">↗</span>
+          </div>
+
+          <div class="hero-amount" id="home-total">
+            ¥0.00
+          </div>
+
+          <div class="hero-footer">
+            <span>共记录</span>
+            <strong id="home-count">0 笔</strong>
+          </div>
+
+          <div class="hero-decoration hero-decoration-one"></div>
+          <div class="hero-decoration hero-decoration-two"></div>
+        </article>
+
+        <div class="section-heading">
+          <div>
+            <h2>快捷记账</h2>
+            <p>记下每一笔日常开销</p>
+          </div>
+        </div>
+
+        <button
+          class="add-expense-card"
+          id="open-add-home"
+          type="button"
+        >
+          <span class="add-symbol" aria-hidden="true">＋</span>
+
+          <span class="add-copy">
+            <strong>记一笔支出</strong>
+            <small>记录今天花了多少钱</small>
+          </span>
+
+          <span class="add-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <div class="section-heading section-heading-spaced">
+          <div>
+            <h2>支出分类</h2>
+            <p>看看钱主要花在哪里</p>
+          </div>
+
+          <button
+            class="text-button"
+            type="button"
+            data-page="stats"
+          >
+            查看全部
+          </button>
+        </div>
+
+        <div class="category-grid" id="home-categories">
+          <!-- 由 JavaScript 动态生成 -->
+        </div>
+
+        <div class="section-heading section-heading-spaced">
+          <div>
+            <h2>最近记录</h2>
+            <p>最近的每一笔支出</p>
+          </div>
+
+          <button
+            class="text-button"
+            type="button"
+            data-page="records"
+          >
+            全部记录
+          </button>
+        </div>
+
+        <div class="record-list" id="home-records">
+          <!-- 由 JavaScript 动态生成 -->
+        </div>
+
+      </section>
+
+      <!-- ================= 统计 ================= -->
+      <section class="page" id="page-stats">
+
+        <div class="section-heading">
+          <div>
+            <h2>支出统计</h2>
+            <p>你的每一分钱，都有迹可循</p>
+          </div>
+        </div>
+
+        <article class="stats-total-card">
+          <span class="muted-label">累计支出</span>
+
+          <div class="stats-total" id="stats-total">
+            ¥0.00
+          </div>
+
+          <div class="stats-divider"></div>
+
+          <div class="stats-summary">
+            <div>
+              <span>支出笔数</span>
+              <strong id="stats-count">0 笔</strong>
+            </div>
+
+            <div>
+              <span>平均每笔</span>
+              <strong id="stats-average">¥0.00</strong>
+            </div>
+          </div>
+        </article>
+
+        <div class="section-heading section-heading-spaced">
+          <div>
+            <h2>分类明细</h2>
+            <p>按累计金额排序</p>
+          </div>
+        </div>
+
+        <div class="stats-category-list" id="stats-categories">
+          <!-- 由 JavaScript 动态生成 -->
+        </div>
+
+        <div class="section-heading section-heading-spaced">
+          <div>
+            <h2>近期支出</h2>
+            <p>最近 7 天的每日支出</p>
+          </div>
+        </div>
+
+        <article class="weekly-card">
+          <div class="weekly-chart" id="weekly-chart">
+            <!-- 由 JavaScript 动态生成 -->
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ================= 记录 ================= -->
+      <section class="page" id="page-records">
+
+        <div class="section-heading">
+          <div>
+            <h2>全部记录</h2>
+            <p id="records-subtitle">查看和管理你的支出</p>
+          </div>
+
+          <button
+            class="primary-small-button"
+            type="button"
+            id="open-add-records"
+          >
+            ＋ 记一笔
+          </button>
+        </div
