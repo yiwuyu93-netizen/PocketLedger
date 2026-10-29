@@ -205,4 +205,276 @@
           >
             ＋ 记一笔
           </button>
-        </div
+        </div>
+
+        <div class="filter-card">
+          <label class="filter-label" for="filter-category">
+            分类筛选
+          </label>
+
+          <select id="filter-category">
+            <option value="all">全部分类</option>
+          </select>
+        </div>
+
+        <div class="record-list" id="all-records">
+          <!-- 由 JavaScript 动态生成 -->
+        </div>
+
+      </section>
+
+      <!-- ================= 设置 ================= -->
+      <section class="page" id="page-settings">
+
+        <div class="section-heading">
+          <div>
+            <h2>设置</h2>
+            <p>管理你的账本和应用</p>
+          </div>
+        </div>
+
+        <article class="settings-card">
+          <div class="settings-brand">
+            <div class="settings-app-icon">账</div>
+
+            <div>
+              <h3>小账本</h3>
+              <p>简单记录，清楚生活</p>
+            </div>
+          </div>
+
+          <div class="settings-info-row">
+            <span>应用版本</span>
+            <strong>1.0.0</strong>
+          </div>
+
+          <div class="settings-info-row">
+            <span>记录笔数</span>
+            <strong id="settings-count">0 笔</strong>
+          </div>
+
+          <div class="settings-info-row">
+            <span>数据存储</span>
+            <strong>本地浏览器</strong>
+          </div>
+
+          <div class="settings-info-row">
+            <span>离线支持</span>
+            <strong id="offline-status">正在检测</strong>
+          </div>
+        </article>
+
+        <article class="settings-card">
+          <h3 class="settings-section-title">数据管理</h3>
+
+          <p class="settings-description">
+            记录保存在当前浏览器的 localStorage 中。
+            清除浏览器数据可能导致账本丢失。
+          </p>
+
+          <button
+            class="settings-action-button"
+            id="export-data"
+            type="button"
+          >
+            <span>导出账本数据</span>
+            <span aria-hidden="true">↓</span>
+          </button>
+
+          <button
+            class="settings-action-button"
+            id="import-data"
+            type="button"
+          >
+            <span>导入账本数据</span>
+            <span aria-hidden="true">↑</span>
+          </button>
+
+          <input
+            type="file"
+            id="import-file"
+            accept=".json,application/json"
+            hidden
+          />
+
+          <button
+            class="settings-action-button danger-action"
+            id="clear-data"
+            type="button"
+          >
+            <span>清空全部记录</span>
+            <span aria-hidden="true">×</span>
+          </button>
+        </article>
+
+        <div class="privacy-note">
+          <span aria-hidden="true">🔒</span>
+          <p>
+            你的账本数据仅保存在当前浏览器中。
+            本应用不会主动将记账数据上传到服务器。
+          </p>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- 底部导航 -->
+    <nav class="bottom-nav" aria-label="主导航">
+
+      <button
+        class="nav-item active"
+        type="button"
+        data-page="home"
+        aria-current="page"
+      >
+        <span class="nav-icon" aria-hidden="true">⌂</span>
+        <span>首页</span>
+      </button>
+
+      <button
+        class="nav-item"
+        type="button"
+        data-page="stats"
+      >
+        <span class="nav-icon" aria-hidden="true">▥</span>
+        <span>统计</span>
+      </button>
+
+      <button
+        class="nav-item"
+        type="button"
+        data-page="records"
+      >
+        <span class="nav-icon" aria-hidden="true">☷</span>
+        <span>记录</span>
+      </button>
+
+      <button
+        class="nav-item"
+        type="button"
+        data-page="settings"
+      >
+        <span class="nav-icon" aria-hidden="true">⚙</span>
+        <span>设置</span>
+      </button>
+
+    </nav>
+
+  </div>
+
+  <!-- ================= 添加支出弹窗 ================= -->
+  <div
+    class="modal-backdrop"
+    id="expense-modal"
+    aria-hidden="true"
+  >
+    <section
+      class="expense-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+
+      <div class="modal-handle"></div>
+
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">NEW EXPENSE</p>
+          <h2 id="modal-title">记一笔支出</h2>
+        </div>
+
+        <button
+          class="close-button"
+          id="close-modal"
+          type="button"
+          aria-label="关闭弹窗"
+        >
+          ×
+        </button>
+      </div>
+
+      <form id="expense-form">
+
+        <label class="form-label" for="expense-amount">
+          支出金额
+        </label>
+
+        <div class="amount-input-wrap">
+          <span>¥</span>
+
+          <input
+            type="number"
+            id="expense-amount"
+            name="amount"
+            min="0.01"
+            max="999999999"
+            step="0.01"
+            placeholder="0.00"
+            inputmode="decimal"
+            required
+          />
+        </div>
+
+        <label class="form-label" for="expense-category">
+          选择分类
+        </label>
+
+        <div
+          class="category-picker"
+          id="category-picker"
+        >
+          <!-- 由 JavaScript 动态生成 -->
+        </div>
+
+        <input
+          type="hidden"
+          id="expense-category"
+          name="category"
+          value="餐饮"
+        />
+
+        <label class="form-label" for="expense-note">
+          备注
+          <span class="optional-label">选填</span>
+        </label>
+
+        <input
+          class="text-input"
+          type="text"
+          id="expense-note"
+          name="note"
+          maxlength="100"
+          placeholder="例如：午餐、地铁、买书"
+        />
+
+        <label class="form-label" for="expense-date">
+          支出日期
+        </label>
+
+        <input
+          class="text-input"
+          type="date"
+          id="expense-date"
+          name="date"
+          required
+        />
+
+        <button class="submit-button" type="submit">
+          保存这笔支出
+        </button>
+
+      </form>
+    </section>
+  </div>
+
+  <!-- 全局提示 -->
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+</body>
+</html>
